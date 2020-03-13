@@ -624,7 +624,7 @@ class LayoutRangeEncoder : public RangeEncoder {
     }
 
     inline IndexType Encode(const SubresourceLayout& pos) const {
-        return (this->*(encode_sub_layout_function_))(pos) + RangeEncoder::Encode(pos);
+        return (this->*(encode_sub_layout_function_))(pos) + pos.sub_layout.offset + RangeEncoder::Encode(pos);
     }
 
     inline IndexType Encode(const VkImageSubresource& subres, const VkSubresourceLayout& sub_layout) const {
