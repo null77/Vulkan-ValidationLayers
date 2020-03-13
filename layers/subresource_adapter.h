@@ -643,6 +643,10 @@ class LayoutRangeEncoder : public RangeEncoder {
   protected:
     void PopulateFunctionPointers();
 
+    IndexType EncodeOnly(const SubresourceLayout& pos) const;
+
+    IndexType DecodeOnly(const IndexType& encode, SubresourceLayout& layout_decode) const;
+
   private:
     VkSubresourceLayout full_range_sub_layout;
     SubresourceLayout limits_;
