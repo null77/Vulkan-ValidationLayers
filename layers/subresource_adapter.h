@@ -664,7 +664,7 @@ class SubresourceLayoutGenerator : public SubresourceLayout {
     const VkImageSubresourceRange& Limits() const { return limits_; }
     const VkSubresourceLayout& Limits_SubresourceLayout() const { return limits_sub_layout_; }
 
-    SubresourceOffsetGenerator& operator++() { return *this; }
+    SubresourceLayoutGenerator& operator++() { return *this; }
 
     // General purpose and slow, when we have no other information to update the generator
     void Seek(IndexType index) {
