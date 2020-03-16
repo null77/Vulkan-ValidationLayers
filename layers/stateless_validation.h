@@ -1097,8 +1097,17 @@ class StatelessValidation : public ValidationObject {
                         "VkCreateRenderpass2(): pCreateInfo->pDependencies[%d].srcSubpass must be less than subpassCount (%d)", i,
                         pCreateInfo->subpassCount);
                 } else {
+                    uint64_t bad1 = 0xcadecade;
+                    uint64_t bad2 = 0x5a5a5a5a;
+                    VkRenderPass renderpass = reinterpret_cast<VkRenderPass>(bad1);
+                    VkBuffer buffer = reinterpret_cast<VkBuffer>(bad2);
+
+                    LogObjectList objlist(device);
+                    objlist.add(renderpass);
+                    objlist.add(buffer);
+
                     skip |= LogError(
-                        device, "VUID-VkRenderPassCreateInfo-srcSubpass-02517",
+                        objlist, "VUID-VkRenderPassCreateInfo-srcSubpass-02517",
                         "VkCreateRenderpass(): pCreateInfo->pDependencies[%d].srcSubpass must be less than subpassCount (%d)", i,
                         pCreateInfo->subpassCount);
                 }
